@@ -11,12 +11,12 @@ unsigned int roundup_pow_of_two(unsigned int size);
 
 int spin_lock_irqrestore(spinlock_t* lock,unsigned int flags)
 {
-	flags = (unsigned int)lock+1;
+	//flags = (unsigned int)lock+1;
 	return flags;
 }
 int spin_unlock_irqrestore(spinlock_t* lock,unsigned int flags)
 {
-	flags = (unsigned int)lock+1;
+	//flags = (unsigned int)lock+1;
 		return flags;
 
 }
