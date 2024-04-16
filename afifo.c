@@ -41,7 +41,7 @@ bool is_power_of_2(int n) {
 
 
 
-void *kmalloc(size_t i) {
+void* kmalloc(size_t i) {
     return malloc(i);
 }
 
@@ -55,7 +55,7 @@ struct afifo *afifo_init(unsigned char *buffer, unsigned int size, spinlock_t *l
     BUG_ON(!is_power_of_2(size));
     fifo = kmalloc(sizeof(struct afifo));
     if (!fifo)
-        return ERR_PTR(-ENOMEM);
+        return 0;
     fifo->buffer = buffer;
     fifo->size = size;
     fifo->in = fifo->out = 0;
@@ -75,10 +75,10 @@ struct afifo *afifo_alloc(unsigned int size, spinlock_t *lock)
     }
     buffer = kmalloc(size);
     if (!buffer)
-        return ERR_PTR(-ENOMEM);
+        return 0;
     ret = afifo_init(buffer, size, lock);
 
-    if (IS_ERR(ret))
+    if ((ret==0))
         kfree(buffer);
     return ret;
 }

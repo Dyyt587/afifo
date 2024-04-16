@@ -29,11 +29,6 @@ extern "C"
 	int spin_unlock_irqrestore(spinlock_t *lock, unsigned int flags);
 	int spin_lock_irqrestore(spinlock_t *lock, unsigned int flags);
 
-#define EPERM 1	 /* Operation not permitted */
-#define ENOENT 2 /* No such file or directory */
-#define ESRCH 3	 /* No such process */
-#define EINTR 4	 /* Interrupted system call */
-
 	typedef struct afifo
 	{
 		unsigned char *buffer; /* the buffer holding the data */
@@ -48,19 +43,6 @@ extern "C"
 	unsigned int __afifo_out(struct afifo *fifo, unsigned char *buffer, unsigned int len);
 	unsigned int __afifo_in_data(struct afifo *fifo, const unsigned char *buffer, unsigned int len);
 	unsigned int __afifo_out_data(struct afifo *fifo, unsigned char *buffer, unsigned int len);
-
-	static inline void *ERR_PTR(long error)
-	{
-		return (void *)error;
-	}
-	static inline long PTR_ERR(const void *ptr)
-	{
-		return (long)ptr;
-	}
-	static inline long IS_ERR(const void *ptr)
-	{
-		return (unsigned long)ptr > (unsigned long)-1000L;
-	}
 
 	static inline unsigned int afifo_get_used(struct afifo *afifo)
 	{
